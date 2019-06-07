@@ -10,6 +10,13 @@
 #include <frc/DoubleSolenoid.h>
 #include <adi/ADIS16470_IMU.h>
 #include <frc/SerialPort.h>
+#include <cameraserver/CameraServer.h>
+#include <thread>
+#include <opencv2/core/core.hpp>
+#include <opencv2/core/types.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <wpi/raw_os_ostream.h>
+
 
 class Robot : public frc::TimedRobot {
  public:
@@ -56,4 +63,11 @@ class Robot : public frc::TimedRobot {
  
  //GyroScope
  frc::ADIS16470_IMU *gyro;
+
+ //Initialize Cameras
+ cs::UsbCamera camera1 = frc::CameraServer::GetInstance()->StartAutomaticCapture(0);
+ cs::UsbCamera camera2 = frc::CameraServer::GetInstance()->StartAutomaticCapture(1);
+
+ //Camera Server
+ cs::VideoSink server = frc::CameraServer::GetInstance()->GetServer();
 };
